@@ -1,14 +1,16 @@
 FROM php:5.6-fpm
 
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-	curl \
-	libfreetype6-dev \
-	libjpeg62-turbo-dev \
-	libmcrypt-dev \
-	xml-core \
-	libpng12-dev \
-	libxml2-dev \
-	php-http-request
+RUN apt-get update && apt-get install -y libmcrypt-dev
+RUN	apt-get install -y curl wget telnet
+RUN	apt-get install -y libfreetype6-dev
+RUN	apt-get install -y libjpeg62-turbo-dev
+RUN	apt-get install -y libmcrypt-dev
+RUN	apt-get install -y xml-core
+RUN	apt-get install -y libpng12-dev
+RUN	apt-get install -y libxml2-dev
+RUN	apt-get install -y php-http-request
+	
+
 # Install php mysql extension	
 RUN docker-php-ext-install pdo_mysql
 
