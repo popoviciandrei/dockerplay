@@ -9,6 +9,8 @@ nginx:
 
 php:
   build:  ./php/
+  environment:
+    XDEBUG_CONFIG: remote_host=192.168.99.1
   expose: 
     - 9000
   links:
@@ -17,9 +19,9 @@ php:
     - app
 
 app:
-  image: php:7.0-fpm
+  image: php:5.6-fpm
   volumes:
-    - ./htdocs:/var/www/html
+    - ./www:/var/www/html
   command: "true"
 
 phpmyadmin:
@@ -34,17 +36,19 @@ phpmyadmin:
 
 mysql:
   image: mysql:latest
+  ports:
+    - 3306:3306
   volumes_from:
     - data
   environment:
-    MYSQL_ROOT_PASSWORD: secret
-    MYSQL_DATABASE: project
-    MYSQL_USER: project
-    MYSQL_PASSWORD: project
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: magento
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
 
 data:
     image: mysql:latest
     volumes: 
-      - ./mysql:/var/lib/mysql
+      - /var/lib/mysql
     command: "true"
 
