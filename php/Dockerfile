@@ -34,6 +34,11 @@ RUN echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 RUN echo "xdebug.remote_port=9050" >> /usr/local/etc/php/conf.d/xdebug.ini
 RUN echo "xdebug.idekey=PHPSTORM_KEY" >> /usr/local/etc/php/conf.d/xdebug.ini
 
+# Add n98-magerun to the container
+RUN wget https://files.magerun.net/n98-magerun.phar \
+	&& chmod +x n98-magerun.phar \
+	&& mv n98-magerun.phar /usr/local/bin/n98-magerun
+
 # Create some aliases
 RUN echo 'alias xdebug_off="mv /usr/local/etc/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini.off"' >> ~/.bashrc
 RUN echo 'alias xdebug_on="mv /usr/local/etc/php/conf.d/xdebug.ini.off /usr/local/etc/php/conf.d/xdebug.ini"' >> ~/.bashrc
